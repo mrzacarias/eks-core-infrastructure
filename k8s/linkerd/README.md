@@ -36,22 +36,19 @@ More details [here](https://github.com/linkerd/linkerd2/tree/main/viz/charts/lin
 ## LinkerD usage
 
 To help you manage your Linkerd service mesh you can install the Linkerd CLI by running:
-
-  curl -sL https://run.linkerd.io/install | sh
+```
+  curl -sL https://run.linkerd.io/install | sh # or brew install linkerd
+```
 
 Alternatively, you can download the CLI directly via the Linkerd releases page:
-
+```
   https://github.com/linkerd/linkerd2/releases/
+```
 
 To make sure everything works as expected, run the following:
-
+```
   linkerd check
-
-The viz extension can be installed by running:
-
-  helm install linkerd-viz linkerd/linkerd-viz
-
-Looking for more? Visit https://linkerd.io/2/getting-started/
+```
 
 Specific values in [values.yml](values.yml)
 
