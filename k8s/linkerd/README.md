@@ -1,27 +1,24 @@
 # LinkerD
 
-## Checking if configuration is right
+## Scripts
+ - `install.sh` will install the package (if not installed) or upgrade it
+ - `uninstall.sh` will uninstall the package
+
+## Installing
 ```
+# Run a check if cluster is ready
 linkerd check --pre
-```
 
-## Installing CRDs
-```
+# Install CRDs first
 linkerd install --crds | kubectl apply -f -
-```
 
-## Installing LinkerD main
-```
+# Install LinkerD
 linkerd install --set proxyInit.runAsRoot=true | kubectl apply -f -
-```
 
-## Checking if installation is complete (may take some minutes)
-```
+# Check installation
 linkerd check
-```
 
-## Install viz (UI)
-```
+# Install Viz (the UI)
 linkerd viz install | kubectl apply -f - 
 ```
 
@@ -30,7 +27,7 @@ linkerd viz install | kubectl apply -f -
 linkerd viz dashboard &
 ```
 
-## Cleanup
+## Uninstall
 ```
 # To remove Linkerd Viz
 linkerd viz uninstall | kubectl delete -f -
