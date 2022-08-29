@@ -1,5 +1,5 @@
-resource "aws_security_group" "node_group_one" {
-  name_prefix = "eks_node_group_one"
+resource "aws_security_group" "security_group_one" {
+  name_prefix = "${local.cluster_name}-security-group-1"
   vpc_id      = module.vpc.vpc_id
 
   ingress {
@@ -13,8 +13,8 @@ resource "aws_security_group" "node_group_one" {
   }
 }
 
-resource "aws_security_group" "node_group_two" {
-  name_prefix = "eks_node_group_two"
+resource "aws_security_group" "security_group_two" {
+  name_prefix = "${local.cluster_name}-security-group-2"
   vpc_id      = module.vpc.vpc_id
 
   ingress {

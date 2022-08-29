@@ -3,7 +3,7 @@ module "eks" {
   version = "18.28.0"
 
   cluster_name    = local.cluster_name
-  cluster_version = "1.22"
+  cluster_version = "1.23"
 
   vpc_id     = module.vpc.vpc_id
   subnet_ids = module.vpc.private_subnets
@@ -19,38 +19,38 @@ module "eks" {
 
   eks_managed_node_groups = {
     one = {
-      name = "eks-node-group-1"
+      name = "node-group-${random_string.suffix.result}-1"
 
       instance_types = ["t2.micro"]
 
-      min_size     = 6
+      min_size     = 4
       max_size     = 10
-      desired_size = 8
+      desired_size = 6
 
       pre_bootstrap_user_data = <<-EOT
       echo 'eks-node-group-1'
       EOT
 
       vpc_security_group_ids = [
-        aws_security_group.node_group_one.id
+        aws_security_group.security_group_one.id
       ]
     }
 
     two = {
-      name = "eks-node-group-2"
+      name = "node-group-${random_string.suffix.result}-2"
 
       instance_types = ["t2.micro"]
 
-      min_size     = 2
-      max_size     = 6
-      desired_size = 4
+      min_size     = 4
+      max_size     = 10
+      desired_size = 6
 
       pre_bootstrap_user_data = <<-EOT
       echo 'eks-node-group-2'
       EOT
 
       vpc_security_group_ids = [
-        aws_security_group.node_group_two.id
+        aws_security_group.security_group_two.id
       ]
     }
   }
