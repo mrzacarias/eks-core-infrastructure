@@ -14,5 +14,6 @@ Kubernetes extra packages are configured via Helm in the [k8s](k8s) directory.
  - [x] Metrics Server (Helm)
  - [x] ArgoCD (Helm)
  - [x] LinkerD (Installer, Helm guide not in great shape)
+ - [x] Cluster Auto Scaler (Helm)
  - [ ] NGINX (Helm)
  - [ ] Let's Encrypt (Helm)
