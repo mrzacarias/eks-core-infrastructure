@@ -1,75 +1,43 @@
 # LinkerD
 
-## Creating temporary certificates
+## Checking if configuration is right
 ```
-step certificate create root.linkerd.cluster.local ca.crt ca.key \
---profile root-ca --no-password --insecure
-
-step certificate create identity.linkerd.cluster.local issuer.crt issuer.key \
---profile intermediate-ca --not-after 8760h --no-password --insecure \
---ca ca.crt --ca-key ca.key
+linkerd check --pre
 ```
 
-## Adding repository
+## Installing CRDs
 ```
-helm repo add linkerd https://helm.linkerd.io/stable
-```
-
-## Installing/Upgrading CRDs chart
-```
-helm upgrade --install \
-  -n linkerd --create-namespace \
-  linkerd-crds linkerd/linkerd-crds
-```
-More details [here](https://github.com/linkerd/linkerd2/tree/main/charts/linkerd-crds)
-
-## Installing/Upgrading Control Plane chart
-```
-helm upgrade --install \
-  -n linkerd --create-namespace \
-  linkerd-control-plane -f values.yml linkerd/linkerd-control-plane
-```
-Specific values in [values.yml](values.yml)
-
-More details [here](https://github.com/linkerd/linkerd2/tree/main/charts/linkerd-control-plane)
-
-## Installing/Upgarding Viz chart
-```
-helm upgrade --install \
-  -n linkerd --create-namespace \
-  linkerd-viz linkerd/linkerd-viz
-```
-More details [here](https://github.com/linkerd/linkerd2/tree/main/viz/charts/linkerd-viz)
-
-## LinkerD usage
-
-To help you manage your Linkerd service mesh you can install the Linkerd CLI by running:
-```
-curl -sL https://run.linkerd.io/install | sh # or brew install linkerd
+linkerd install --crds | kubectl apply -f -
 ```
 
-Alternatively, you can download the CLI directly via the Linkerd releases page:
+## Installing LinkerD main
 ```
-https://github.com/linkerd/linkerd2/releases/
+linkerd install --set proxyInit.runAsRoot=true | kubectl apply -f -
 ```
 
-To make sure everything works as expected, run the following:
+## Checking if installation is complete (may take some minutes)
 ```
 linkerd check
 ```
 
+## Install viz (UI)
+```
+linkerd viz install | kubectl apply -f - 
+```
+
+## LinkerD UI usage
+```
+linkerd viz dashboard &
+```
+
 ## Cleanup
 ```
-# Removing charts
-helm uninstall -n linkerd linkerd-viz
-helm uninstall -n linkerd linkerd-control-plane
-helm uninstall -n linkerd linkerd-crds
-
 # To remove Linkerd Viz
 linkerd viz uninstall | kubectl delete -f -
 
-# Removing control plane
+# Removing everything else
 linkerd uninstall | kubectl delete -f -
+
+# Removing Namespace
+kubectl delete ns linkerd
 ```
-
-
