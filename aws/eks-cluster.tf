@@ -23,9 +23,9 @@ module "eks" {
 
       instance_types = ["t2.micro"]
 
-      min_size     = 4
-      max_size     = 10
-      desired_size = 6
+      desired_size = 5
+      min_size     = 3
+      max_size     = 7
 
       pre_bootstrap_user_data = <<-EOT
       echo 'eks-node-group-1'
@@ -41,9 +41,9 @@ module "eks" {
 
       instance_types = ["t2.micro"]
 
-      min_size     = 4
-      max_size     = 10
-      desired_size = 6
+      desired_size = 5
+      min_size     = 3
+      max_size     = 7
 
       pre_bootstrap_user_data = <<-EOT
       echo 'eks-node-group-2'
