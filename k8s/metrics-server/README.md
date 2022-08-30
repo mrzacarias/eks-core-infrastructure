@@ -11,6 +11,8 @@ helm repo add bitnami https://charts.bitnami.com/bitnami
 helm upgrade --install \
   -n metrics-server --create-namespace \
   metrics-server -f ./values.yml bitnami/metrics-server
+
+kubectl annotate ns metrics-server "linkerd.io/inject=enabled"
 ```
 Specific values in [values.yml](values.yml)
 

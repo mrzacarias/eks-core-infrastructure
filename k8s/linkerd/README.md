@@ -41,6 +41,12 @@ linkerd viz install -f values-viz.yml | kubectl apply -f -
 
 # Check viz installation
 linkerd viz check
+
+# Annotate namespaces
+kubectl annotate ns default "linkerd.io/inject=enabled"
+kubectl annotate ns kube-node-lease "linkerd.io/inject=enabled"
+kubectl annotate ns kube-public "linkerd.io/inject=enabled"
+kubectl annotate ns kube-system "linkerd.io/inject=enabled"
 ```
 
 ## LinkerD UI usage

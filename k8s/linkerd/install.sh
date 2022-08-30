@@ -26,3 +26,11 @@ echo -e "\033[32m√\033[0m Viz Installed!\n"
 
 # Check viz installation
 linkerd viz check
+
+# Annotate namespaces
+kubectl annotate ns default "linkerd.io/inject=enabled"
+kubectl annotate ns kube-node-lease "linkerd.io/inject=enabled"
+kubectl annotate ns kube-public "linkerd.io/inject=enabled"
+kubectl annotate ns kube-system "linkerd.io/inject=enabled"
+
+echo -e "\033[32m√\033[0m Main namespaces annotated!\n"
