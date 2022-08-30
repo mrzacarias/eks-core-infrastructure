@@ -5,4 +5,4 @@ helm upgrade --install \
   -n cluster-autoscaler --create-namespace \
   cluster-autoscaler -f ./values.yml autoscaler/cluster-autoscaler
 
-echo "Package Installed!"
+echo -e "\033[32m√\033[0m Cluster Autoscaler Installed!"

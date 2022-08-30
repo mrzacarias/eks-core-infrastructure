@@ -5,7 +5,4 @@ linkerd viz uninstall | kubectl delete -f -
 # Removing everything else
 linkerd uninstall | kubectl delete -f -
 
-# Removing Namespace
-kubectl delete ns linkerd
-
-echo "Package uninstalled!"
+echo -e "\033[32m√\033[0m LinkerD uninstalled!"

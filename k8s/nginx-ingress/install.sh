@@ -5,4 +5,4 @@ helm upgrade --install \
   -n nginx-ingress --create-namespace \
   nginx-ingress -f ./values.yml ingress-nginx/ingress-nginx
 
-echo "Package Installed!"
+echo -e "\033[32m√\033[0m NGINX Ingress Installed!"

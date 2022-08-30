@@ -1,4 +1,4 @@
 #!/bin/bash
 helm uninstall -n argo-cd argo-cd
 
-echo "Package uninstalled!"
+echo -e "\033[32m√\033[0m ArgoCD uninstalled!"

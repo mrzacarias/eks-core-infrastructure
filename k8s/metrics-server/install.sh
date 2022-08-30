@@ -5,4 +5,4 @@ helm upgrade --install \
   -n metrics-server --create-namespace \
   metrics-server -f ./values.yml bitnami/metrics-server
 
-echo "Package Installed!"
+echo -e "\033[32m√\033[0m Metrics Server Installed!"
