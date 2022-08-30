@@ -33,5 +33,5 @@ echo "Argo CD URL: http://127.0.0.1:8080/"
 2. Argo CD credentials:
 ```
 echo "Username: \"admin\""
-echo "Password: $(kubectl -n default get secret argocd-secret -o jsonpath="{.data.clearPassword}" | base64 -d)"
+echo "Password: $(kubectl -n argo-cd get secret argocd-secret -o jsonpath="{.data.clearPassword}" | base64 -d)"
 ```
