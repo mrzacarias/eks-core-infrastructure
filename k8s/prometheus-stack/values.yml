@@ -700,7 +700,7 @@ alertmanager:
 ## Using default values from https://github.com/grafana/helm-charts/blob/main/charts/grafana/values.yaml
 ##
 grafana:
-  enabled: true
+  enabled: false # will be installed in a different helm deploy
   namespaceOverride: ""
 
   ## Image and version of grafana. If not provided (left commented out) default values from grafana charts will be used.

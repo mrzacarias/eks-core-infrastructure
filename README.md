@@ -13,8 +13,11 @@ Kubernetes extra packages are configured via Helm in the [k8s](k8s) directory.
  - [x] AWS related resources (Terraform)
  - [x] Metrics Server (Helm)
  - [x] ArgoCD (Helm, only works on k8s 1.22)
- - [x] LinkerD (Installer, Helm guide not in great shape)
+ - [x] LinkerD (Installer, Helm chart not in great shape)
  - [x] Prometheus Stack (Helm)
+ - [ ] Grafana (helm)
+   - [ ] LinkerD Prometheus as Datasource
+   - [ ] Link up Grafana with LinkeD Viz
  - [ ] NGINX Ingress Controller (Helm)
  - [ ] Let's Encrypt (Helm)
  - [ ] Cluster Auto Scaler (Helm)
