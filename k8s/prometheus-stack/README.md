@@ -26,5 +26,6 @@ helm uninstall -n prometheus-stack prometheus-stack
 ```
 
 ## Prometheus Stack Usage
-
+```
 kubectl -n prometheus-stack port-forward svc/prometheus-stack-prometheus 9090
+```
