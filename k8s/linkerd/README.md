@@ -53,6 +53,6 @@ linkerd viz dashboard
 # To remove Linkerd Viz
 linkerd viz uninstall | kubectl delete -f -
 
-# Removing everything else
+# Removing Control Plane
 linkerd uninstall | kubectl delete -f -
 ```
