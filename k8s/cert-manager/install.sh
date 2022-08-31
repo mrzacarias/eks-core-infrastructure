@@ -15,6 +15,6 @@ kubectl annotate ns cert-manager "linkerd.io/inject=enabled"
 
 echo -e "\033[32m√\033[0m Cert Manager Installed!\n"
 
-kubectl -n cert-manager apply -f issuer.yml # let's encrypt staging for now
+kubectl -n cert-manager apply -f issuer.yml # let's encrypt staging for now, personal email
 
 echo -e "\033[32m√\033[0m Issuer Created!\n"
