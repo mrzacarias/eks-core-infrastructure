@@ -20,8 +20,7 @@ Kubernetes extra packages are configured via Helm in the [k8s](k8s) directory.
  - [x] LinkerD (Installer, Helm chart not in great shape)
    - [x] Link up Grafana with LinkeD Viz
  - [x] Cert Manager (Helm, Let's Encrypt Issuer)
- - [x] NGINX Ingress Controller (Helm)
- - [ ] CloudFlare (???)
+ - [x] NGINX Ingress Controller (Helm, CloudFlare configuration)
  - [ ] Cluster Auto Scaler (Helm)
  - [ ] Loki (Helm)
  - [ ] Tempo (Helm)

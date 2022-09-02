@@ -24,46 +24,77 @@ More details [here](https://github.com/kubernetes/ingress-nginx/tree/main/charts
 ```
 helm uninstall -n ingress-nginx ingress-nginx
 ```
+## Creating an Ingress
 
-## NGINX Ingress Controller Usage
+The [Bootstrapper](https://github.com/mrzacarias/bootstrapper) tool will already create a good template to start. After configuring the NGINX Ingress, you can use the LB DNS as the "host" value in your Ingress configuration, like this:
 ```
-It may take a few minutes for the LoadBalancer IP to be available.
-You can watch the status by running 'kubectl --namespace ingress-nginx get services -o wide -w ingress-nginx-controller'
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: {app_name}
+  namespace: default
+  labels:
+    app: {app_name}
+    env: prod
+  annotations:
+    cert-manager.io/cluster-issuer: "letsencrypt-staging"
+    nginx.ingress.kubernetes.io/use-regex: "true"
+    nginx.ingress.kubernetes.io/rewrite-target: /$2
+spec:
+  ingressClassName: nginx
+  tls:
+  - hosts:
+    - <load-balancer-id>.us-east-1.elb.amazonaws.com # your Load Balancer automatically generated DNS
+    secretName: {app_name}-tls
+  rules:
+    - host: <load-balancer-id>.us-east-1.elb.amazonaws.com # your Load Balancer automatically generated DNS
+      http:
+        paths:
+          - path: /{app_name}(/|$)(.*)
+            pathType: Prefix
+            backend:
+              service:
+                name: {app_name}
+                port:
+                  number: 80
+```
 
-An example Ingress that makes use of the controller:
-  apiVersion: networking.k8s.io/v1
-  kind: Ingress
-  metadata:
-    name: example
-    namespace: foo
-  spec:
-    ingressClassName: nginx
-    rules:
-      - host: www.example.com
-        http:
-          paths:
-            - pathType: Prefix
-              backend:
-                service:
-                  name: exampleService
-                  port:
-                    number: 80
-              path: /
-    # This section is only required if TLS is to be enabled for the Ingress
-    tls:
-      - hosts:
-        - www.example.com
-        secretName: example-tls
+## CloudFlare (or other DNS provider)
 
-If TLS is enabled for the Ingress, a Secret containing the certificate and key must also be provided:
+You can also use a DNS provider to create a more readable host. Some of the work for that include:
+- Buying a valid domain
+- Configuring the CNAME records for that domain, pointing to your Load Balancer DNS (e.g. `<load-balancer-id>.us-east-1.elb.amazonaws.com`)
 
-  apiVersion: v1
-  kind: Secret
-  metadata:
-    name: example-tls
-    namespace: foo
-  data:
-    tls.crt: <base64 encoded cert>
-    tls.key: <base64 encoded key>
-  type: kubernetes.io/tls
+After that, you can configure your DNS with the readable host:
+```
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: {app_name}
+  namespace: default
+  labels:
+    app: {app_name}
+    env: prod
+  annotations:
+    cert-manager.io/cluster-issuer: "letsencrypt-staging"
+    nginx.ingress.kubernetes.io/use-regex: "true"
+    nginx.ingress.kubernetes.io/rewrite-target: /$2
+    nginx.ingress.kubernetes.io/ssl-redirect: "false" # Only needed if you have a ERR_TOO_MANY_REDIRECTS error
+spec:
+  ingressClassName: nginx
+  tls:
+  - hosts:
+    - <your-host>.com
+    secretName: {app_name}-tls
+  rules:
+    - host: <your-host>.com
+      http:
+        paths:
+          - path: /{app_name}(/|$)(.*)
+            pathType: Prefix
+            backend:
+              service:
+                name: {app_name}
+                port:
+                  number: 80
 ```
