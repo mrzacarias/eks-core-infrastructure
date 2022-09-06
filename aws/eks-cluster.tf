@@ -21,11 +21,11 @@ module "eks" {
     one = {
       name = "node-group-${random_string.suffix.result}-1"
 
-      instance_types = ["t2.micro"]
+      instance_types = ["t3a.medium"]
 
-      desired_size = 6
-      min_size     = 5
-      max_size     = 10
+      desired_size = 1
+      min_size     = 1
+      max_size     = 3
 
       pre_bootstrap_user_data = <<-EOT
       echo 'eks-node-group-1'
@@ -39,11 +39,11 @@ module "eks" {
     two = {
       name = "node-group-${random_string.suffix.result}-2"
 
-      instance_types = ["t2.micro"]
+      instance_types = ["t3a.medium"]
 
-      desired_size = 6
-      min_size     = 5
-      max_size     = 10
+      desired_size = 1
+      min_size     = 1
+      max_size     = 3
 
       pre_bootstrap_user_data = <<-EOT
       echo 'eks-node-group-2'
