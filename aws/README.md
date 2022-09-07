@@ -1,6 +1,6 @@
 # AWS Terraform Specs
 
-Repository of Terraform specs to setup AWS resources
+Repository of Terraform specs to setup AWS resources. Heavily based on [this guide](https://github.com/hashicorp/learn-terraform-provision-eks-cluster).
 
 ## Install/Update resources
 ```
